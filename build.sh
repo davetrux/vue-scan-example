@@ -1,9 +1,11 @@
 #!/bin/bash
 
 echo 'Clean up build directory'
-# BE CAREFUL!!!
-# Running this command locally can accidentally delete any files you've added to the project but not to git
-git clean -fdx
+rm -rf node_modules
+rm -rf .scannerwork
+rm -rf coverage
+rm -rf reports
+rm junit.xml
 
 echo 'npm tasks'
 # Install dependencies
@@ -50,6 +52,10 @@ echo 'Remove old images'
 echo 'Scan dependencies'
 mkdir reports || true
 dependency-check --scan ./ -f JSON -f HTML -f XML -o reports
+
+# Set environment variables for Sonar credentials (local only)
+set -a
+. ./.env.local
 
 echo 'SonarQube analysis'
 # Run SonarQube scanner
