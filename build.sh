@@ -1,11 +1,7 @@
 #!/bin/bash
 
 echo 'Clean up build directory'
-rm -rf node_modules
-rm -rf .scannerwork
-rm -rf coverage
-rm -rf reports
-rm junit.xml
+git clean -fdx
 
 echo 'npm tasks'
 # Install dependencies
